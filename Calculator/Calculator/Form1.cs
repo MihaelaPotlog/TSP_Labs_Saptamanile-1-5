@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Calculator
@@ -28,6 +30,7 @@ namespace Calculator
         private void CEButton_Click(object sender, EventArgs e)
         {
             this.InputBox.Text = "0";
+            this.ResultLabel.Text = "Result";
             CurrentOperator = null;
             
         }
@@ -36,16 +39,21 @@ namespace Calculator
         {
 
             string pressedKeyCipher = ((Button) sender).Tag.ToString();
-            if(this.InputBox.Text != "0")
+            
+            HandleCipher(pressedKeyCipher, e);
+
+        }
+
+        private void HandleCipher(string pressedKeyCipher, EventArgs e)
+        {
+            if (this.InputBox.Text != "0")
                 this.InputBox.Text = this.InputBox.Text.Insert(this.InputBox.Text.Length, pressedKeyCipher);
             else
             {
                 if (pressedKeyCipher != "0")
                     this.InputBox.Text = pressedKeyCipher;
             }
-
         }
-
 
         private void SignButton_Click(object sender, EventArgs e)
         {
@@ -78,6 +86,18 @@ namespace Calculator
             this.ResultLabel.Text = OperatorsCalculationList[CurrentOperator](FirstTypedNumber, secondTypedNumber).ToString();
         }
 
-      
+        
+
+
+        private void InputBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string pressedKeyChar = e.KeyChar.ToString();
+            if(Regex.IsMatch(pressedKeyChar, "[^0-9.]"))
+                e.Handled = true;
+
+            
+            
+            
+        }
     }
 }

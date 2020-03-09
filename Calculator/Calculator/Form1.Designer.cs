@@ -61,15 +61,16 @@
             this.InputBox.Name = "InputBox";
             this.InputBox.Size = new System.Drawing.Size(644, 41);
             this.InputBox.TabIndex = 2;
+            this.InputBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.InputBox_KeyPress);
             // 
             // ResultLabel
             // 
-            this.ResultLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ResultLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ResultLabel.Location = new System.Drawing.Point(650, 26);
             this.ResultLabel.Name = "ResultLabel";
-            this.ResultLabel.Size = new System.Drawing.Size(145, 35);
+            this.ResultLabel.Size = new System.Drawing.Size(145, 40);
             this.ResultLabel.TabIndex = 3;
-            this.ResultLabel.Text = "label1";
+            this.ResultLabel.Text = "Result";
             // 
             // tableLayoutPanel
             // 
