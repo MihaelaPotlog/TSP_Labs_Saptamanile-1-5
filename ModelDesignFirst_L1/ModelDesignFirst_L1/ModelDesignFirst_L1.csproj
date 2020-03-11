@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Album.cs">
+      <DependentUpon>ModelManyToMany.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Artist.cs">
+      <DependentUpon>ModelManyToMany.tt</DependentUpon>
+    </Compile>
     <Compile Include="Customer.cs">
       <DependentUpon>ModelOneToMany.tt</DependentUpon>
     </Compile>
@@ -69,6 +75,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ModelManyToMany.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelManyToMany.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelManyToMany.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelManyToMany.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelManyToMany.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelManyToMany.edmx</DependentUpon>
     </Compile>
     <Compile Include="ModelOneToMany.Context.cs">
       <AutoGen>True</AutoGen>
@@ -107,6 +128,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelOneToMany.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="ModelManyToMany.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelManyToMany.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ModelManyToMany.edmx.diagram">
+      <DependentUpon>ModelManyToMany.edmx</DependentUpon>
+    </None>
     <None Include="ModelOneToMany.edmx.diagram">
       <DependentUpon>ModelOneToMany.edmx</DependentUpon>
     </None>
@@ -123,6 +151,17 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="ModelManyToMany.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelManyToMany.Context.cs</LastGenOutput>
+      <DependentUpon>ModelManyToMany.edmx</DependentUpon>
+    </Content>
+    <Content Include="ModelManyToMany.edmx.sql" />
+    <Content Include="ModelManyToMany.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelManyToMany.cs</LastGenOutput>
+      <DependentUpon>ModelManyToMany.edmx</DependentUpon>
     </Content>
     <Content Include="ModelOneToMany.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

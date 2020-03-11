@@ -12,8 +12,9 @@ namespace ModelDesignFirst_L1
         static void Main(string[] args)
         {
             Console.WriteLine("Test Model Designer First");
-            TestPerson();
-            TestOneToMany();
+            // TestPerson();
+            // TestOneToMany();
+            TestManyToMany();
             Console.ReadKey();
         }
 
@@ -53,7 +54,7 @@ namespace ModelDesignFirst_L1
                 };
 
                 Console.WriteLine("TotalValue:");
-               
+
                 Order o1 = new Order()
                 {
                     TotalValue = Int32.Parse(Console.ReadLine()),
@@ -62,7 +63,7 @@ namespace ModelDesignFirst_L1
                 };
 
                 Console.WriteLine("TotalValue:");
-                
+
                 Order o2 = new Order()
                 {
                     TotalValue = Int32.Parse(Console.ReadLine()),
@@ -83,6 +84,55 @@ namespace ModelDesignFirst_L1
                         Console.WriteLine("\tOrders: {0}, {1}, {2}",
                             ox.Id, ox.Date, ox.TotalValue);
                 }
+            }
+        }
+
+        static void TestManyToMany()
+        {
+            Console.WriteLine("\nMany to many association");
+
+            using (ModelManyToManyContainer context =
+                new ModelManyToManyContainer())
+            {
+                Console.WriteLine("FirstName:");
+                Console.WriteLine("LastName:");
+
+                Artist artist1 = new Artist()
+                {
+
+                    FirstName = Console.ReadLine(),
+                    LastName = Console.ReadLine()
+                };
+
+                Console.WriteLine("Album Name");
+                Album album1 = new Album()
+                {
+                    Name = Console.ReadLine(),
+                    Artists = new List<Artist>() { artist1}
+                };
+
+                Console.WriteLine("Album Name");
+                Album album2 = new Album()
+                {
+                    Name = Console.ReadLine(),
+                    Artists = new List<Artist>() { artist1 }
+                };
+
+                context.Artists.Add(artist1);
+                context.Albums.Add(album1);
+                context.Albums.Add(album2);
+                context.SaveChanges();
+
+                foreach (var artist in context.Artists)
+                {
+                    Console.WriteLine("Name: {0} {1}", artist.FirstName, artist.LastName);
+                    foreach (var album in artist.Albums)
+                    {
+                        Console.WriteLine("Album: {0} Id: {1}", album.Id, album.Name);
+                    }
+                }
+
+
             }
         }
     }
