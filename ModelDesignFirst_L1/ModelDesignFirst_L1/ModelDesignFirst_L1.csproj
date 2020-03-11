@@ -61,6 +61,27 @@
     <Compile Include="Customer.cs">
       <DependentUpon>ModelOneToMany.tt</DependentUpon>
     </Compile>
+    <Compile Include="Doctor.cs">
+      <DependentUpon>DoctorPacientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DoctorPacient.cs">
+      <DependentUpon>DoctorPacientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DoctorPacientModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DoctorPacientModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DoctorPacientModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DoctorPacientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DoctorPacientModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DoctorPacientModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -109,6 +130,11 @@
     <Compile Include="Order.cs">
       <DependentUpon>ModelOneToMany.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pacient.cs">
+      <DependentUpon>DoctorPacientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PartialDoctor.cs" />
+    <Compile Include="PartialPacient.cs" />
     <Compile Include="Person.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -121,6 +147,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="DoctorPacientModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DoctorPacientModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DoctorPacientModel.edmx.diagram">
+      <DependentUpon>DoctorPacientModel.edmx</DependentUpon>
+    </None>
     <None Include="Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
@@ -141,6 +174,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DoctorPacientModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DoctorPacientModel.edmx</DependentUpon>
+      <LastGenOutput>DoctorPacientModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DoctorPacientModel.edmx.sql" />
+    <Content Include="DoctorPacientModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DoctorPacientModel.edmx</DependentUpon>
+      <LastGenOutput>DoctorPacientModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
