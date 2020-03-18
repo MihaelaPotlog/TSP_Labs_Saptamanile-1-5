@@ -1,8 +1,6 @@
 namespace EF_StudiiDeCaz.Caz4
 {
-    using System;
     using System.Data.Entity;
-    using System.Linq;
 
     public class BusinessContext : DbContext
     {

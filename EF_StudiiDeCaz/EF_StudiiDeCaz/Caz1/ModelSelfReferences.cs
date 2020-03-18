@@ -1,8 +1,6 @@
 namespace EF_StudiiDeCaz
 {
-    using System;
     using System.Data.Entity;
-    using System.Linq;
 
     public class ModelSelfReferences : DbContext
     {

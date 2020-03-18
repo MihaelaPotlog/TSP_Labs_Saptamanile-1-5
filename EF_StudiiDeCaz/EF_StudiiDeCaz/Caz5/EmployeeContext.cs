@@ -1,8 +1,6 @@
 namespace EF_StudiiDeCaz.Caz5
 {
-    using System;
     using System.Data.Entity;
-    using System.Linq;
 
     public class EmployeeContext : DbContext
     {

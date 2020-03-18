@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EF_StudiiDeCaz.Caz2;
 using EF_StudiiDeCaz.Caz3;
 using EF_StudiiDeCaz.Caz4;
@@ -14,14 +12,109 @@ namespace EF_StudiiDeCaz
     {
         static void Main(string[] args)
         {
-            // StudiuCaz1();
+            StudiuCaz1();
             // StudiuCaz2();
             // StudiuCaz3();
             // StudiuCaz4();
-            StudiuCaz5();
+            // StudiuCaz5();
             Console.ReadKey();
         }
+        static void StudiuCaz1()
+        {
+            using (var context = new ModelSelfReferences())
+            {
+                var parent1 = new SelfReference() { Name = "Ana" };
+                var child1 = new SelfReference()
+                {
+                    Name = "Maria",
+                    ParentSelfReference = parent1
+                };
+                context.SelfReferences.Add(parent1);
+                context.SelfReferences.Add(child1);
 
+                var child2 = new SelfReference() { Name = "Silviu" };
+                var parent2 = new SelfReference() { Name = "Alex" };
+                parent2.References.Add(child2);
+                context.SelfReferences.AddRange(new List<SelfReference>() { child2, parent2 });
+
+                context.SaveChanges();
+                foreach (var selfReference in context.SelfReferences)
+                {
+                    Console.WriteLine("SelfReference {0}", selfReference.Name);
+                    foreach (var childReference in selfReference.References)
+                    {
+                        Console.WriteLine("    Child SelfReference {0}", childReference.Name);
+                    }
+                }
+            }
+        }
+        
+        private static void StudiuCaz2()
+        {
+            using (var context = new ProductContext())
+            {
+
+                var product1 = new Product()
+                {
+                    Description = "asus laptop",
+                    ImageURL = "/Desktop/laptop",
+                    Price = 4000.0m,
+                    SKU = 0
+
+                };
+                var product2 = new Product
+                {
+                    SKU = 202,
+                    Description = "Small Deployment Back Pack",
+                    Price = 29.97M,
+                    ImageURL = "/pack202.jpg"
+                };
+                // context.Products.Add(product1);
+                context.Products.Add(product2);
+                context.SaveChanges();
+                foreach (var product in context.Products)
+                {
+                    Console.WriteLine("{0} {1} {2} {3}",product.SKU, product.ImageURL, product.Price, product.Description);
+                }
+            }
+        }
+
+       
+
+        public static void StudiuCaz3()
+        {
+            byte[] thumbBits = new byte[100];
+            byte[] fullBits = new byte[2000];
+            using (var context = new PhotographContext())
+            {
+                var photo = new Photograph
+                {
+                    Title = "Cats",
+                    ThumbnailBits = thumbBits
+                };
+                var fullImage = new PhotographFullImage
+                {
+                    HighResolutionBits =
+                        fullBits
+                };
+                photo.PhotographFullImage = fullImage;
+                context.Photographs.Add(photo);
+                context.SaveChanges();
+            }
+            using (var context = new PhotographContext())
+            {
+                foreach (var photo in context.Photographs)
+                {
+                    Console.WriteLine("Photo: {0}, ThumbnailSize {1} bytes",
+                        photo.Title, photo.ThumbnailBits.Length);
+                    // explicitly load the "expensive" entity,
+                    context.Entry(photo)
+                        .Reference(p => p.PhotographFullImage).Load();
+                    Console.WriteLine("Full Image Size: {0} bytes",
+                        photo.PhotographFullImage.HighResolutionBits.Length);
+                }
+            }
+        }
         private static void StudiuCaz4()
         {
             using (var context = new BusinessContext())
@@ -52,7 +145,7 @@ namespace EF_StudiiDeCaz
                 };
                 context.Businesses.Add(web);
                 context.SaveChanges();
-            
+
                 Console.WriteLine("\n--- All Businesses ---");
                 foreach (var b in context.Businesses)
                 {
@@ -73,118 +166,44 @@ namespace EF_StudiiDeCaz
                 }
             }
         }
-        private static void StudiuCaz2()
-        {
-            using (var context = new ProductContext())
-            {
-                var product1 = new Product()
-                {
-                    Description = "asus laptop",
-                    ImageURL = "/Desktop/laptop",
-                    Price = 4000.0m,
-                    SKU = 0
-
-                };
-                var product2 = new Product
-                {
-                    SKU = 202,
-                    Description = "Small Deployment Back Pack",
-                    Price = 29.97M,
-                    ImageURL = "/pack202.jpg"
-                };
-                // context.Products.Add(product1);
-                context.Products.Add(product2);
-                context.SaveChanges();
-                foreach (var product in context.Products)
-                {
-                    Console.WriteLine("{0} {1} {2} {3}",product.SKU, product.ImageURL, product.Price, product.Description);
-                }
-            }
-        }
-
-        static void StudiuCaz1()
-        {
-            using (var context = new ModelSelfReferences())
-            {
-                context.SelfReferences.Add(new SelfReference() { Name = "Ana" });
-                context.SaveChanges();
-                foreach (var selfReference in context.SelfReferences)
-                {
-                    Console.WriteLine(selfReference.Name);
-                }
-            }
-        }
-
-        public static void StudiuCaz3()
-        {
-            byte[] thumbBits = new byte[100];
-            byte[] fullBits = new byte[2000];
-            using (var context = new PhotographContext())
-            {
-                var photo = new Photograph
-                {
-                    Title = "My Dog",
-                    ThumbnailBits = thumbBits
-                };
-                var fullImage = new PhotographFullImage
-                {
-                    HighResolutionBits =
-                        fullBits
-                };
-                photo.PhotographFullImage = fullImage;
-                context.Photographs.Add(photo);
-                context.SaveChanges();
-            }
-            using (var context = new PhotographContext())
-            {
-                foreach (var photo in context.Photographs)
-                {
-                    Console.WriteLine("Photo: {0}, ThumbnailSize {1} bytes",
-                        photo.Title, photo.ThumbnailBits.Length);
-                    // explicitly load the "expensive" entity,
-                    context.Entry(photo)
-                        .Reference(p => p.PhotographFullImage).Load();
-                    Console.WriteLine("Full Image Size: {0} bytes",
-                        photo.PhotographFullImage.HighResolutionBits.Length);
-                }
-            }
-        }
-
         static void StudiuCaz5()
         {
             using (var context = new EmployeeContext())
             {
-                var fte1 = new FullTimeEmployee
+                Console.WriteLine("Firstname:");
+                var firstName1 = Console.ReadLine();
+                Console.WriteLine("Lastname:");
+                var lastName1 = Console.ReadLine();
+                Console.WriteLine("Salary:");
+                decimal salary1 = Decimal.Parse(Console.ReadLine());
+
+                context.Employees.Add(new  FullTimeEmployee()
                 {
-                    FirstName = "Jane",
-                    LastName =
-                        "Doe",
-                    Salary = 71500M
-                };
-                context.Employees.Add(fte1);
-                var fte2 = new FullTimeEmployee
+                    FirstName = firstName1,
+                    LastName = lastName1,
+                    Salary = salary1
+                });
+
+                Console.WriteLine("Firstname:");
+                var firstName2 = Console.ReadLine();
+                Console.WriteLine("Lastname:");
+                var lastName2 = Console.ReadLine();
+                Console.WriteLine("Salary:");
+                decimal wage2 = Decimal.Parse(Console.ReadLine());
+
+                context.Employees.Add(new HourlyEmployee()
                 {
-                    FirstName = "John",
-                    LastName = "Smith",
-                    Salary = 62500M
-                };
-                context.Employees.Add(fte2);
-                var hourly1 = new HourlyEmployee
-                {
-                    FirstName = "Tom",
-                    LastName =
-                        "Jones",
-                    Wage = 8.75M
-                };
-                context.Employees.Add(hourly1);
+                    FirstName = firstName2,
+                    LastName = lastName2,
+                    Wage = wage2
+                });
                 context.SaveChanges();
            
                 Console.WriteLine("--- All Employees ---");
                 foreach (var emp in context.Employees)
                 {
                     bool fullTime = emp is HourlyEmployee ? false : true;
-                    Console.WriteLine("{0} {1} ({2})", emp.FirstName, emp.LastName,
-                        fullTime ? "Full Time" : "Hourly");
+                    Console.WriteLine("{0} {1} ({2})", emp.FirstName, emp.LastName, fullTime ? "Full Time" : "Hourly");
                 }
                 Console.WriteLine("--- Full Time ---");
                 foreach (var fte in context.Employees.OfType<FullTimeEmployee>())

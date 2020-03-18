@@ -66,17 +66,28 @@
     <Compile Include="Caz5\FullTimeEmployee.cs" />
     <Compile Include="Caz5\HourlyEmployee.cs" />
     <Compile Include="Caz5\EmployeeContext.cs" />
+    <Compile Include="DatabaseFirst_SelfReference.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseFirst_SelfReference.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Caz1\SelfReference.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="DatabaseFirst_SelfReference.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DatabaseFirst_SelfReference.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DatabaseFirst_SelfReference.edmx.diagram">
+      <DependentUpon>DatabaseFirst_SelfReference.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

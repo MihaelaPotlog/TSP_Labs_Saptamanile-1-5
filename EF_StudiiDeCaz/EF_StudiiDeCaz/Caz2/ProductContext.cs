@@ -1,8 +1,6 @@
 namespace EF_StudiiDeCaz.Caz2
 {
-    using System;
     using System.Data.Entity;
-    using System.Linq;
 
     public class ProductContext : DbContext
     {
