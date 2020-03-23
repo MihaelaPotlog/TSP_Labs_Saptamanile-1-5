@@ -13,8 +13,8 @@ namespace Laborator1
         {
             Thread.CurrentThread.Name = "Fir principal";
 
-            Console.WriteLine($"\n0- Inchide program\n  " +
-                            $" 1-TryEvents() =>explicitarea folosirii eventurilor\n" +
+            Console.WriteLine($"\n0- Inchide program\n" +
+                            $" 1- TryEvents() =>explicitarea folosirii eventurilor\n" +
                             $" 2- TryThreads() =>explicitarea threadurilor\n" +
                             $" 3- TryTasks() => explicitarea folosirii taskurilor\n" +
                             $" 4- TryEventBasedAsynchronousPattern() => explicitarea folosirii clasei Backgroundworker\n");
@@ -30,8 +30,8 @@ namespace Laborator1
                 else if (input == 4)
                     TryEventBasedAsynchronousPattern();
 
-                Console.WriteLine($"\n COMENZI: \n0- Inchide program\n  " +
-                            $" 1-TryEvents() =>explicitarea folosirii eventurilor\n" +
+                Console.WriteLine($"\n COMENZI: \n0- Inchide program\n" +
+                            $" 1- TryEvents() =>explicitarea folosirii eventurilor\n" +
                             $" 2- TryThreads() =>explicitarea threadurilor\n" +
                             $" 3- TryTasks() => explicitarea folosirii taskurilor\n" +
                             $" 4- TryEventBasedAsynchronousPattern() => explicitarea folosirii clasei Backgroundworker\n");
@@ -89,8 +89,7 @@ namespace Laborator1
         public static void TryThreads()
         {
             List<string> commonResource = new List<string>();
-            
-           
+                
             Thread childThread = new Thread(() => FindingPrimNumber.IsPrim(10, commonResource));
             childThread.Name = "Child Thread";
             childThread.Start();

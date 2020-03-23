@@ -14,7 +14,7 @@ namespace Laborator1
 
         public void OnSiteChangedHandler(string arg)
         {
-            Console.WriteLine("Subscriber2  handler for event SiteChanged was called!\n Info:{0} has changed\n\n",arg);
+            Console.WriteLine("Subscriber2  handler for event SiteChanged was called! Info:{0} has changed\n\n",arg);
         }
     }
 }
