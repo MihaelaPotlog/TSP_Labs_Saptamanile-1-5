@@ -46,10 +46,10 @@ namespace Laborator1
             BackgroundWorker firstWorker = new BackgroundWorker() { WorkerReportsProgress = true };
             BackgroundWorker secondWorker = new BackgroundWorker() { WorkerReportsProgress = true };
 
-            firstWorker.DoWork += DoWork;
+            firstWorker.DoWork += FirstWorkerDoWork;
             firstWorker.RunWorkerAsync(commonResource);
 
-            secondWorker.DoWork += DoWork;
+            secondWorker.DoWork += SecondWorkerDoWork;
             secondWorker.RunWorkerAsync(commonResource);
 
             Console.WriteLine("Asteptam  8 secunde pentru a fi terminate operatiile asincrone executate de backgraoundworkeri !!");
@@ -60,10 +60,16 @@ namespace Laborator1
             }
         }
 
-        public static void DoWork(object sender, DoWorkEventArgs e)
+        public static void FirstWorkerDoWork(object sender, DoWorkEventArgs e)
         {
             var arg = (List<string>) e.Argument;
             FindingPrimNumber.IsPrim(9, arg);
+        }
+
+        public static void SecondWorkerDoWork(object sender, DoWorkEventArgs e)
+        {
+            var arg = (List<string>)e.Argument;
+            FindingPrimNumber.IsPrimInefficient(9, arg);
         }
 
         public  static void TryTasks()
@@ -72,7 +78,7 @@ namespace Laborator1
 
            
             Console.WriteLine("Pornim primul task!");
-            Task.Run(() => FindingPrimNumber.IsPrim(9, commonResource));
+            Task.Run(() => FindingPrimNumber.IsPrimInefficient(9, commonResource));
 
             Console.WriteLine("Pornim al II-lea task!");
             Task.Run(() => FindingPrimNumber.IsPrim(10, commonResource));
@@ -90,16 +96,16 @@ namespace Laborator1
         {
             List<string> commonResource = new List<string>();
                 
-            Thread childThread = new Thread(() => FindingPrimNumber.IsPrim(10, commonResource));
+            Thread childThread = new Thread(() => FindingPrimNumber.IsPrimInefficient(10, commonResource));
             childThread.Name = "Child Thread";
             childThread.Start();
 
             FindingPrimNumber.IsPrim(9, commonResource);
+
             foreach (var info in commonResource)
             {
                 Console.WriteLine(info);
             }
-            Console.ReadKey();
         }
 
 
