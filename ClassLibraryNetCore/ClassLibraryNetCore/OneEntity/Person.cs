@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ClassLibraryNetCore
+﻿namespace ClassLibraryNetCore
 {
     public  class Person
     {

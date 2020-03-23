@@ -1,7 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ClassLibraryNetCore.OneToMany
 {
@@ -17,7 +14,7 @@ namespace ClassLibraryNetCore.OneToMany
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=EfCoreLabDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;");
+            optionsBuilder.UseSqlServer(SqlDatabaseString.ClassLibraryNetCore);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
