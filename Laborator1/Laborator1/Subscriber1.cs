@@ -9,12 +9,12 @@ namespace Laborator1
         public Subscriber1(SiteScannerPublisher siteScannerPublisher)
         {
             SiteScannerPublisher = siteScannerPublisher;
-            siteScannerPublisher.SiteChangedEvent += OnSiteChanged;
+            siteScannerPublisher.SiteChangedEvent += OnSiteChangedHandler;
         }
 
-        public void OnSiteChanged(string arg)
+        public void OnSiteChangedHandler(string arg)
         {
-            Console.WriteLine("Subscriber1 object: {0} has changed", arg);
+            Console.WriteLine("Subscriber1  handler for event SiteChanged was called!\n Info:{0} has changed\n\n", arg);
         }
     }
 }

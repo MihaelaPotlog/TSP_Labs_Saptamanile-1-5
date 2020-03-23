@@ -26,10 +26,13 @@ namespace Laborator1.PrimAlgorithms
 
         public  static void IsPrim(int nr, List<string> info)
         {
+            
             DateTime start = DateTime.Today;
-            info.Add("Start fir: " + Thread.CurrentThread.Name + DateTime.Now.ToString(" HH:mm:ss:mmm"));
+            info.Add($"Start fir: {Thread.CurrentThread.Name}  {DateTime.Now.ToString(" HH:mm:ss:mmm")}  " +
+                $"Numar natural dat = {nr}");
+           
             int searchedPrimNr = -1;
-            int number = nr;
+            
             while (nr > 2 && searchedPrimNr == -1)
             {
                 nr--;
@@ -43,8 +46,7 @@ namespace Laborator1.PrimAlgorithms
                     searchedPrimNr = nr;
             }
             Thread.Sleep(2000);
-            info.Add("End fir: " + Thread.CurrentThread.Name + " " +DateTime.Now.ToString(" HH:mm:ss:mmm"));
-            // Console.WriteLine("Thread {0} : Numar prim mai mic decat {1} este: {2}", Thread.CurrentThread.Name, number, searchedPrimNr);
+            info.Add($"End fir: {Thread.CurrentThread.Name}  {DateTime.Now.ToString(" HH:mm:ss:mmm")} Numar prim = {searchedPrimNr}");
         }
     }
 }
